@@ -15,8 +15,19 @@ describe User do
   it { should respond_to(:password_confirmation)}
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:admin) }
 
   it { should be_valid }
+
+  describe "when an admin" do 
+    before do
+      @user.save!
+      @user.admin = true
+    end
+
+    it { should be_admin}
+  end
+
 
   describe "when the email contains uppercase" do
   	let(:mixed_cased_email) { "Foo@eXxamPle.cOm"}
